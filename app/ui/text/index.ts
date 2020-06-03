@@ -1,17 +1,17 @@
 import { css } from 'styled-components'
 
-export const CSSTextFS_22 = css`
+export const CSSTextFS_16 = css`
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 22px;
+	font-size: 16px;
 	line-height: 100%;
 `
 
-export const CSSextFS_24 = css`
+export const CSSextFS_20 = css`
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 24px;
+	font-size: 20px;
 	line-height: 100%;
 `

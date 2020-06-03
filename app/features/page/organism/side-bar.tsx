@@ -1,9 +1,10 @@
 import React from 'react'
 import styled from 'styled-components'
-import { CSSTextFS_22, CSSextFS_24 } from '../../../ui/text'
-import Logo from '../statick/img/logo.svg'
+import { CSSextFS_20 } from '../../../ui/text'
+import Logo from '../static/img/logo.svg'
 import { useStore } from 'effector-react'
 import { $colName } from '../../model/data-exel'
+import { SelectItems } from '../molecules/select-items'
 
 export const SideBar = () => {
 	const colName = useStore($colName)
@@ -17,7 +18,7 @@ export const SideBar = () => {
 				<TitleMetrics>Критерии поиска</TitleMetrics>
 				<div>
 					{colName.map((x, i) => (
-						<ItemMetrics key={i}>{x}</ItemMetrics>
+						<SelectItems data={x} key={i} />
 					))}
 				</div>
 			</Metrics>
@@ -26,7 +27,7 @@ export const SideBar = () => {
 }
 
 const HeaderTitle = styled.div`
-	${CSSextFS_24};
+	${CSSextFS_20};
 	font-size: 32px;
 `
 
@@ -48,14 +49,7 @@ const Wrapper = styled.div`
 
 const Metrics = styled.div``
 
-const ItemMetrics = styled.div`
-	${CSSTextFS_22};
-	margin-bottom: 35px;
-	&:last-child {
-		margin-bottom: 0;
-	}
-`
-
 const TitleMetrics = styled.div`
-	${CSSextFS_24};
+	${CSSextFS_20};
+	margin-bottom: 50px;
 `
