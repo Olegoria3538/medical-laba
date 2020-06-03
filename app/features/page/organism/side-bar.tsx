@@ -41,10 +41,11 @@ const Header = styled.div`
 `
 
 const Wrapper = styled.div`
-	width: 325px;
+	width: 200px;
 	padding: 30px;
 	height: 100%;
 	background: #eef1f6;
+	margin-right: 50px;
 `
 
 const Metrics = styled.div``

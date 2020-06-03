@@ -1,13 +1,32 @@
-import { createStore, createEvent } from 'effector'
+import { createStore, createEvent, combine } from 'effector'
 import { AnyObject } from '../../lib/type'
 
-const $dataExel = createStore<{ complete: boolean; data: AnyObject[] }>({
+const $dataExel = createStore<{
+	complete: boolean
+	data: { [key: string]: React.ReactText }[]
+}>({
 	complete: false,
 	data: [],
 })
 const setDataExel = createEvent<AnyObject[]>()
 $dataExel.on(setDataExel, (_, data) => ({ complete: !!data.length, data }))
 
+$dataExel.watch(x => console.log(x))
+
 const $colName = $dataExel.map(({ data }) => Object.keys(data[0] || {}))
 
-export { $dataExel, setDataExel, $colName }
+const $groupExel = combine({
+	data: $dataExel.map(x => x.data),
+	colName: $colName,
+}).map(({ data, colName }) =>
+	colName.map(x => ({
+		type: typeof data[0][x],
+		name: x,
+		data:
+			typeof data[0][x] === 'string'
+				? data.map(q => q[x]).filter((x, i, array) => array.indexOf(x) === i)
+				: undefined,
+	}))
+)
+
+export { $dataExel, setDataExel, $colName, $groupExel }
