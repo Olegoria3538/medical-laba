@@ -12,6 +12,7 @@ export const CSSextFS_24 = css`
 	font-family: Roboto;
 	font-style: normal;
 	font-weight: normal;
-	font-size: 24px;
+  font-size: 24px;
+  
 	line-height: 100%;
 `
