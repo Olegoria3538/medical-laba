@@ -16,11 +16,13 @@ export const SideBar = () => {
 			</Header>
 			<Metrics>
 				<TitleMetrics>Критерии поиска</TitleMetrics>
-				<div>
-					{colName.map((x, i) => (
-						<SelectItems data={x} key={i} />
-					))}
-				</div>
+        <ListOuter>
+          <div>
+            {colName.map((x, i) => (
+              <SelectItems data={x} key={i} />
+            ))}
+          </div>
+        </ListOuter>
 			</Metrics>
 		</Wrapper>
 	)
@@ -29,6 +31,10 @@ export const SideBar = () => {
 const HeaderTitle = styled.div`
 	${CSSextFS_20};
 	font-size: 32px;
+`
+const ListOuter = styled.div`
+  height: min-content;
+  overflow: hidden;
 `
 
 const Header = styled.div`
@@ -45,8 +51,8 @@ const Wrapper = styled.div`
 	padding: 30px;
 	height: 100%;
 	background: #eef1f6;
-	margin-right: 50px;
-`
+  `
+	// margin-right: 50px;
 
 const Metrics = styled.div``
 

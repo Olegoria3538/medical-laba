@@ -42,7 +42,7 @@ export const DropZone = () => {
 						//@ts-ignore
 						<input {...getInputProps()} />
 					}
-					<p>Затяни в меня екзель</p>
+					<p>Затяни в меня Excel документ</p>
 				</DropZoneWrapper>
 			}
 		</Wrapper>
