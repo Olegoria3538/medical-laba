@@ -1,6 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { CSSextFS_20 } from '../../../ui/text'
+//@ts-ignore
 import Logo from '../static/img/logo.svg'
 import { useStore } from 'effector-react'
 import { $colName } from '../../model/data-exel'
@@ -16,13 +17,13 @@ export const SideBar = () => {
 			</Header>
 			<Metrics>
 				<TitleMetrics>Критерии поиска</TitleMetrics>
-        <ListOuter>
-          <div>
-            {colName.map((x, i) => (
-              <SelectItems data={x} key={i} />
-            ))}
-          </div>
-        </ListOuter>
+				<ListOuter>
+					<div>
+						{colName.map((x, i) => (
+							<SelectItems data={x} key={i} />
+						))}
+					</div>
+				</ListOuter>
 			</Metrics>
 		</Wrapper>
 	)
@@ -33,8 +34,8 @@ const HeaderTitle = styled.div`
 	font-size: 32px;
 `
 const ListOuter = styled.div`
-  height: min-content;
-  overflow: hidden;
+	height: min-content;
+	overflow: hidden;
 `
 
 const Header = styled.div`
@@ -51,8 +52,8 @@ const Wrapper = styled.div`
 	padding: 30px;
 	height: 100%;
 	background: #eef1f6;
-  `
-	// margin-right: 50px;
+`
+// margin-right: 50px;
 
 const Metrics = styled.div``
 
