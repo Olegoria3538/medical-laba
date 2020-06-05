@@ -29,4 +29,8 @@ const $groupExel = combine({
 	}))
 )
 
-export { $dataExel, setDataExel, $colName, $groupExel }
+const $valueExel = $dataExel.map(
+	({ data }) => data?.map(x => Object.values(x)) || []
+)
+
+export { $dataExel, setDataExel, $colName, $groupExel, $valueExel }

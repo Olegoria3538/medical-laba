@@ -82,7 +82,9 @@ const WrapperItem = styled.div`
 	width: 200px;
 `
 
-const Wrapper = styled.div``
+const Wrapper = styled.div`
+	margin-bottom: 50px;
+`
 
 const WrapperMetrics = styled.div`
 	display: flex;

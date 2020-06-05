@@ -21,11 +21,15 @@ export const SelectItems: React.FC<{ data: string }> = ({ data }) => {
 
 const ItemMetrics = styled.div`
 	${CSSTextFS_16};
-	margin-bottom: 35px;
+	margin-bottom: 15px;
 	display: flex;
 	align-items: center;
 	&:last-child {
 		margin-bottom: 0;
+	}
+	& > span {
+		padding: 0;
+		margin-right: 10px;
 	}
 	cursor: pointer;
 `
