@@ -24,7 +24,7 @@ export const TableBuild = () => {
 		direction: 'asc' | 'desc'
 	}>({ name: '', direction: 'asc' })
 
-	const sliseRezult = useMemo(() => {
+	const sliceResult = useMemo(() => {
 		const sortIndex = findIndex(x => x === sortMetric.name)(colName)
 		const res = (array: React.ReactText[][]) =>
 			rowsPerPage === -1
@@ -72,7 +72,7 @@ export const TableBuild = () => {
 						</TableRow>
 					</TableHead>
 					<TableBody>
-						{sliseRezult.map((x, i) => (
+						{sliceResult.map((x, i) => (
 							<TableRow key={i}>
 								{x.map((x, i) => (
 									<TableCell key={i}>{x}</TableCell>
