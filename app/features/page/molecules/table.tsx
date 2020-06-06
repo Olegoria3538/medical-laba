@@ -9,9 +9,10 @@ import Paper from '@material-ui/core/Paper'
 import { useStore } from 'effector-react'
 import { $colName, $valueExel } from '../../model/data-exel'
 import TablePagination from '@material-ui/core/TablePagination'
-import { chunk, sort } from '../utils/functional'
+import { chunk } from '../utils/functional'
 import { TableSortLabel } from '@material-ui/core'
 import { findIndex, compose } from 'ramda'
+import { sortTable } from '../utils/sort-table'
 
 export const TableBuild = () => {
 	const colName = useStore($colName)
@@ -30,23 +31,8 @@ export const TableBuild = () => {
 				? array
 				: chunk<React.ReactText[]>(rowsPerPage)(array)[page]
 		if (sortIndex !== -1) {
-			const sortFunc = sort<React.ReactText[]>((a, b) => {
-				if (sortMetric.direction === 'desc') {
-					return a[sortIndex] > b[sortIndex]
-						? 1
-						: b[sortIndex] > a[sortIndex]
-						? -1
-						: 0
-				} else {
-					return b[sortIndex] > a[sortIndex]
-						? 1
-						: a[sortIndex] > b[sortIndex]
-						? -1
-						: 0
-				}
-			})
-			const c = compose(res, sortFunc)
-			return c(valueExel)
+			const sortFunc = sortTable(sortMetric.direction, sortIndex)
+			return compose(res, sortFunc)(valueExel)
 		}
 		return res(valueExel)
 	}, [page, valueExel, rowsPerPage, colName, sortMetric])
