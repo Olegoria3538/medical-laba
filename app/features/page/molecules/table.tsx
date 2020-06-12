@@ -13,6 +13,7 @@ import { chunk } from '../utils/functional'
 import { TableSortLabel } from '@material-ui/core'
 import { findIndex, compose } from 'ramda'
 import { sortTable } from '../utils/sort-table'
+import styled from 'styled-components'
 
 export const TableBuild = () => {
 	const colName = useStore($colName)
@@ -53,44 +54,54 @@ export const TableBuild = () => {
 	}
 
 	return (
-		<Paper>
-			<TableContainer component={Paper}>
-				<Table aria-label="simple table" size="small">
-					<TableHead>
-						<TableRow>
-							{colName.map((x, i) => (
-								<TableCell key={i}>
-									<TableSortLabel
-										active={sortMetric.name === x}
-										direction={sortMetric.direction}
-										onClick={() => clickSort(x)}
-									>
-										{x}
-									</TableSortLabel>
-								</TableCell>
-							))}
-						</TableRow>
-					</TableHead>
-					<TableBody>
-						{sliceResult.map((x, i) => (
-							<TableRow key={i}>
-								{x.map((x, i) => (
-									<TableCell key={i}>{x}</TableCell>
+		<Wrapper>
+			<Paper>
+				<TableContainer component={Paper}>
+					<Table aria-label="simple table" size="small">
+						<TableHead>
+							<TableRow>
+								{colName.map((x, i) => (
+									<TableCell key={i}>
+										<TableSortLabel
+											active={sortMetric.name === x}
+											direction={sortMetric.direction}
+											onClick={() => clickSort(x)}
+										>
+											{x}
+										</TableSortLabel>
+									</TableCell>
 								))}
 							</TableRow>
-						))}
-					</TableBody>
-				</Table>
-			</TableContainer>
-			<TablePagination
-				rowsPerPageOptions={[5, 10, 25, { label: 'Все', value: -1 }]}
-				component="div"
-				count={valueExel.length}
-				rowsPerPage={rowsPerPage}
-				page={page}
-				onChangePage={(_, p) => setPage(p)}
-				onChangeRowsPerPage={e => setRowsPerPage(parseInt(e.target.value, 10))}
-			/>
-		</Paper>
+						</TableHead>
+						<TableBody>
+							{sliceResult.map((x, i) => (
+								<TableRow key={i}>
+									{x.map((x, i) => (
+										<TableCell key={i}>{x}</TableCell>
+									))}
+								</TableRow>
+							))}
+						</TableBody>
+					</Table>
+				</TableContainer>
+				<TablePagination
+					rowsPerPageOptions={[5, 10, 25, { label: 'Все', value: -1 }]}
+					component="div"
+					count={valueExel.length}
+					rowsPerPage={rowsPerPage}
+					page={page}
+					onChangePage={(_, p) => setPage(p)}
+					onChangeRowsPerPage={e =>
+						setRowsPerPage(parseInt(e.target.value, 10))
+					}
+				/>
+			</Paper>
+		</Wrapper>
 	)
 }
+
+const Wrapper = styled.div`
+	.MuiTableCell-sizeSmall {
+		padding: 6px 0px 6px 10px;
+	}
+`

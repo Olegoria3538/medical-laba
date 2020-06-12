@@ -1,17 +1,22 @@
-import React from 'react'
+import React, { useState, useRef } from 'react'
 import { Form } from 'react-final-form'
 import styled from 'styled-components'
 import { useStore } from 'effector-react'
 import { $groupExel } from '../../model/data-exel'
 import { TextField, Select } from 'mui-rff'
 import { MenuItem, Checkbox, ListItemText, Button } from '@material-ui/core'
+import { useOutsideAlerter } from '../utils/click-outside'
 
 const onSubmit = async (values: any) => {
 	window.alert(JSON.stringify(values))
 }
 
 export const FormSearch = () => {
+	const [active, setActive] = useState<string>('')
+	const range = useRef<HTMLDivElement>(null)
+	useOutsideAlerter({ ref: range, callBack: () => setActive('') })
 	const groupExel = useStore($groupExel)
+
 	return (
 		<Wrapper>
 			<h1>Поиск</h1>
@@ -24,7 +29,29 @@ export const FormSearch = () => {
 							{groupExel.map((x, i) => (
 								<WrapperItem key={i}>
 									{x.type === 'number' && (
-										<TextField label={x.name} name={x.name} type="text" />
+										<>
+											<TextField label={x.name} name={x.name} type="number" />
+											<RangeTitle onClick={() => setActive(x.name)}>
+												Диапозон
+											</RangeTitle>
+
+											<WrapperRange
+												show={active === x.name}
+												ref={active === x.name ? range : null}
+											>
+												<Title>Диапозон</Title>
+												<TextField
+													label={'+'}
+													name={`${x.name}UpRange`}
+													type="number"
+												/>
+												<TextField
+													label={'-'}
+													name={`${x.name}DownRange`}
+													type="number"
+												/>
+											</WrapperRange>
+										</>
 									)}
 									{x.type === 'string' && (
 										<Select
@@ -72,6 +99,30 @@ export const FormSearch = () => {
 	)
 }
 
+const WrapperRange = styled.div<{ show: boolean }>`
+	margin-bottom: 50px;
+	position: absolute;
+	padding: 10px;
+	background: white;
+	border-radius: 5px;
+	z-index: 10;
+	top: -15px;
+	left: 0;
+	box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+		0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+
+	& > div {
+		margin-bottom: 5px;
+	}
+
+	display: none;
+	${({ show }) => show && 'display: block;'}
+`
+
+const Title = styled.div`
+	font-size: 12px;
+`
+
 const WrapperBtn = styled.div`
 	display: flex;
 `
@@ -80,6 +131,7 @@ const WrapperItem = styled.div`
 	margin-bottom: 15px;
 	margin-right: 30px;
 	width: 200px;
+	position: relative;
 `
 
 const Wrapper = styled.div`
@@ -89,4 +141,12 @@ const Wrapper = styled.div`
 const WrapperMetrics = styled.div`
 	display: flex;
 	flex-flow: wrap;
+`
+
+const RangeTitle = styled.div`
+	font-size: 12px;
+	position: absolute;
+	right: 0;
+	top: 0;
+	cursor: pointer;
 `
