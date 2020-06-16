@@ -14,5 +14,8 @@
     "postinstall": "yarn electron-rebuild"
   },
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {},
+  "devDependencies": {
+    "@types/react-div-100vh": "^0.3.0"
+  }
 }

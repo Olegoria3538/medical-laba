@@ -15,16 +15,14 @@ export const SideBar = () => {
 				<img src={Logo} />
 				<HeaderTitle>МПС</HeaderTitle>
 			</Header>
-			<Metrics>
-				<TitleMetrics>Критерии поиска</TitleMetrics>
-				<ListOuter>
-					<div>
+      <TitleMetrics>Критерии поиска</TitleMetrics>
+				<MetricsList>
+
 						{colName.map((x, i) => (
 							<SelectItems data={x} key={i} />
 						))}
-					</div>
-				</ListOuter>
-			</Metrics>
+
+				</MetricsList>
 		</Wrapper>
 	)
 }
@@ -33,31 +31,30 @@ const HeaderTitle = styled.div`
 	${CSSextFS_20};
 	font-size: 32px;
 `
-const ListOuter = styled.div`
-	height: min-content;
-	overflow: hidden;
+
+const MetricsList = styled.div`
+  width: 240px;
+  height: 78vh;
+  overflow-y: overlay;
+
 `
 
 const Header = styled.div`
 	display: flex;
 	align-items: center;
-	margin-bottom: 35px;
+	margin-bottom: 20px;
 	& > img {
 		margin-right: 20px;
 	}
 `
 
 const Wrapper = styled.div`
-	width: 200px;
-	padding: 30px;
+  padding: 30px 50px 30px 30px;
 	height: 100%;
 	background: #eef1f6;
 `
-// margin-right: 50px;
-
-const Metrics = styled.div``
 
 const TitleMetrics = styled.div`
 	${CSSextFS_20};
-	margin-bottom: 50px;
+	margin-bottom: 25px;
 `

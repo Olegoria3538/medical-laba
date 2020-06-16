@@ -15,5 +15,6 @@ export const Search = () => {
 const Wrapper = styled.div`
 	flex: 1;
 	height: fit-content;
-	padding: 0 25px;
+  padding: 0 25px;
+  width: 70%;
 `
