@@ -7,17 +7,18 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Paper from '@material-ui/core/Paper'
 import { useStore } from 'effector-react'
-import { $colName, $valueExel } from '../../model/data-exel'
+import { $colName } from '../../model/data-exel'
 import TablePagination from '@material-ui/core/TablePagination'
 import { chunk } from '../utils/functional'
 import { TableSortLabel } from '@material-ui/core'
 import { findIndex, compose } from 'ramda'
 import { sortTable } from '../utils/sort-table'
 import styled from 'styled-components'
+import { $tableDataValue } from '../model/tabel-data'
 
 export const TableBuild = () => {
 	const colName = useStore($colName)
-	const valueExel = useStore($valueExel)
+	const valueExel = useStore($tableDataValue)
 	const [page, setPage] = useState<number>(0)
 	const [rowsPerPage, setRowsPerPage] = useState<number>(10)
 	const [sortMetric, setSortMetric] = useState<{
@@ -26,16 +27,20 @@ export const TableBuild = () => {
 	}>({ name: '', direction: 'asc' })
 
 	const sliceResult = useMemo(() => {
-		const sortIndex = findIndex(x => x === sortMetric.name)(colName)
-		const res = (array: React.ReactText[][]) =>
-			rowsPerPage === -1
-				? array
-				: chunk<React.ReactText[]>(rowsPerPage)(array)[page]
-		if (sortIndex !== -1) {
-			const sortFunc = sortTable(sortMetric.direction, sortIndex)
-			return compose(res, sortFunc)(valueExel)
+		if (valueExel.length) {
+			const sortIndex = findIndex(x => x === sortMetric.name)(colName)
+			const res = (array: React.ReactText[][]) =>
+				rowsPerPage === -1
+					? array
+					: chunk<React.ReactText[]>(rowsPerPage)(array)[page]
+			if (sortIndex !== -1) {
+				const sortFunc = sortTable(sortMetric.direction, sortIndex)
+				return compose(res, sortFunc)(valueExel)
+			}
+			return res(valueExel)
+		} else {
+			return []
 		}
-		return res(valueExel)
 	}, [page, valueExel, rowsPerPage, colName, sortMetric])
 
 	const clickSort = (name: string) => {

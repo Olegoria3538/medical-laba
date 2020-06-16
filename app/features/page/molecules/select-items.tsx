@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import { setSelectMetrics, $selectMetrics } from '../../model/select-metrics'
+import { setSelectMetrics, $selectMetrics } from '../model/select-metrics'
 import { useStore } from 'effector-react'
 import { Checkbox } from '@material-ui/core'
 import { CSSTextFS_16 } from '../../../ui/text'

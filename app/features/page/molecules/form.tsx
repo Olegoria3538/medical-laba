@@ -2,21 +2,29 @@ import React, { useState, useRef } from 'react'
 import { Form } from 'react-final-form'
 import styled from 'styled-components'
 import { useStore } from 'effector-react'
-import { $groupExel } from '../../model/data-exel'
 import { TextField, Select } from 'mui-rff'
 import { MenuItem, Checkbox, ListItemText, Button } from '@material-ui/core'
 import { useOutsideAlerter } from '../utils/click-outside'
+import { AnyObject } from 'final-form'
+import { setParams } from '../model/params-search'
+import { $selectExelData } from '../model/select-metrics'
 
-const onSubmit = async (values: any) => {
-	window.alert(JSON.stringify(values))
+const onSubmit = async (values: AnyObject) => {
+	setParams(values)
 }
 
 export const FormSearch = () => {
 	const [active, setActive] = useState<string>('')
 	const range = useRef<HTMLDivElement>(null)
 	useOutsideAlerter({ ref: range, callBack: () => setActive('') })
-	const groupExel = useStore($groupExel)
-
+	const groupExel = useStore($selectExelData)
+	if (!groupExel?.length)
+		return (
+			<Wrapper>
+				<h1>Поиск</h1>
+				<div>Выберите параметры для поиска</div>
+			</Wrapper>
+		)
 	return (
 		<Wrapper>
 			<h1>Поиск</h1>
