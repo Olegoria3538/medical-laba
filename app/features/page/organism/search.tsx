@@ -13,8 +13,9 @@ export const Search = () => {
 }
 
 const Wrapper = styled.div`
-	flex: 1;
-	height: fit-content;
-  padding: 0 25px;
-  width: 70%;
+
+  padding: 25px;
+  height: 100vh;
+  overflow: auto;
+  flex-grow: 1;
 `

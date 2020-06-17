@@ -138,7 +138,6 @@ const WrapperBtn = styled.div`
 const WrapperItem = styled.div`
 	margin-bottom: 15px;
 	margin-right: 30px;
-	width: 200px;
 	position: relative;
 `
 
@@ -147,8 +146,9 @@ const Wrapper = styled.div`
 `
 
 const WrapperMetrics = styled.div`
-	display: flex;
-	flex-flow: wrap;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
 `
 
 const RangeTitle = styled.div`

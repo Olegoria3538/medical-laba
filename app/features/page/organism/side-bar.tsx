@@ -34,7 +34,7 @@ const HeaderTitle = styled.div`
 
 const MetricsList = styled.div`
   width: 240px;
-  height: 78vh;
+  height: calc(100vh - 175px);
   overflow-y: overlay;
 
 `
@@ -49,9 +49,10 @@ const Header = styled.div`
 `
 
 const Wrapper = styled.div`
-  padding: 30px 50px 30px 30px;
-	height: 100%;
-	background: #eef1f6;
+  padding: 30px;
+	/* height: 100%; */
+  background: #eef1f6;
+  flex: 0 0 auto;
 `
 
 const TitleMetrics = styled.div`
