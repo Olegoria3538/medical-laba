@@ -14,6 +14,4 @@ const $selectExelData = combine({
 	groupExel.filter(x => selectMetrics.includes(x.name))
 )
 
-$selectExelData.watch(x => console.log(x))
-
 export { $selectMetrics, setSelectMetrics, $selectExelData }

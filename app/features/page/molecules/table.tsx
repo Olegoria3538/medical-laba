@@ -109,4 +109,7 @@ const Wrapper = styled.div`
 	.MuiTableCell-sizeSmall {
 		padding: 6px 0px 6px 10px;
 	}
+	.MuiTableCell-root {
+		font-size: 12px;
+	}
 `

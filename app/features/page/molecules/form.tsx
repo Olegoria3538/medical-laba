@@ -6,7 +6,7 @@ import { TextField, Select } from 'mui-rff'
 import { MenuItem, Checkbox, ListItemText, Button } from '@material-ui/core'
 import { useOutsideAlerter } from '../utils/click-outside'
 import { AnyObject } from 'final-form'
-import { setParams } from '../model/params-search'
+import { setParams, resetParams } from '../model/params-search'
 import { $selectExelData } from '../model/select-metrics'
 
 const onSubmit = async (values: AnyObject) => {
@@ -94,7 +94,10 @@ export const FormSearch = () => {
 								type="button"
 								color="secondary"
 								variant="contained"
-								onClick={form.reset}
+								onClick={() => {
+									form.reset()
+									resetParams()
+								}}
 								disabled={submitting || pristine}
 							>
 								Сбросить
@@ -146,9 +149,9 @@ const Wrapper = styled.div`
 `
 
 const WrapperMetrics = styled.div`
-  display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit,minmax(240px, 1fr));
+	display: grid;
+	gap: 1rem;
+	grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
 `
 
 const RangeTitle = styled.div`

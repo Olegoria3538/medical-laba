@@ -11,8 +11,6 @@ const $dataExel = createStore<{
 const setDataExel = createEvent<AnyObject[]>()
 $dataExel.on(setDataExel, (_, data) => ({ complete: !!data.length, data }))
 
-$dataExel.watch(x => console.log(x))
-
 const $colName = $dataExel.map(({ data }) => Object.keys(data[0] || {}))
 
 const $groupExel = combine({

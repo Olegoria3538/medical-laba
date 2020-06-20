@@ -26,4 +26,7 @@ $params.on(setParams, (_, data) => {
 	return arFormat
 })
 
-export { $params, setParams }
+const resetParams = createEvent()
+$params.reset(resetParams)
+
+export { $params, setParams, resetParams }
